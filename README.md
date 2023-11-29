@@ -8,6 +8,8 @@ Colombia.
 **Example Usage**
 
 ``` dart
+import 'package:fingerprint/fingerprint.dart';
+
 final dataJson = await Fingerprint.generate();
 ```
 
