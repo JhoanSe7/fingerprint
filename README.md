@@ -8,10 +8,32 @@ Colombia.
 **initialize**
 
 ``` dart
+//imports
+import 'package:fingerprint/fingerprint.dart';
+
+// initialize plugin before getting data fingerprint
+await Fingerprint.initialize();
+```
+
+**Example Usage**
+
+``` dart
+//imports
 import 'package:fingerprint/fingerprint_service.dart';
 import 'package:fingerprint/model/fingerprint_data_model.dart';
 
+// get data fingerprint
 FingerprintDataModel? fingerprint = await FingerprintService.generate();
+
+// Geolocation -> city
+String? data = fingerprint?.geolocation?.city;
+
+// Hash -> id
+String? data = fingerprint?.hash?.id;
+
+// General -> deviceId
+String? data = fingerprint?.general?.deviceId;
+
 ```
 
 Return a FingerprintDataModel:
@@ -110,22 +132,6 @@ class General {
         "passiveId": passiveId,
       };
 }
-```
-
-**Example Usage**
-
-``` dart
-FingerprintDataModel? fingerprint = await FingerprintService.generate();
-
-// Geolocation -> city
-String? data = fingerprint?.geolocation?.city;
-
-// Hash -> id
-String? data = fingerprint?.hash?.id;
-
-// General -> deviceId
-String? data = fingerprint?.general?.deviceId;
-
 ```
 
 **Json Plugin Response**
