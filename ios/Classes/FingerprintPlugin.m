@@ -1,10 +1,13 @@
 #import "FingerprintPlugin.h"
+#import "FPDiOS_ObjC_ach.h"
 
 @implementation FingerprintPlugin
 
-FPDiOSACH *fingerPrint;
 
-@property (strong, nonatomic) NSString *jsonFingerprint;
+
+FPDiOSACH *fingerPrint;
+NSString *jsonFingerprint = @"";
+
 
 + (void)registerWithRegistrar:(NSObject<FlutterPluginRegistrar>*)registrar {
   FlutterMethodChannel* channel = [FlutterMethodChannel
@@ -17,6 +20,8 @@ FPDiOSACH *fingerPrint;
 - (void)handleMethodCall:(FlutterMethodCall*)call result:(FlutterResult)result {
   if ([@"getPlatformVersion" isEqualToString:call.method]) {
     result([@"iOS " stringByAppendingString:[[UIDevice currentDevice] systemVersion]]);
+  } else if([@"initialize" isEqualToString:call.method]){
+      fingerPrint = [[FPDiOSACH alloc] init];
   } else if([@"generate" isEqualToString:call.method]){
       @try {
           jsonFingerprint = [fingerPrint getFPDWithAppAction:@"9vyxHBWPNcCvN7I"];
@@ -28,12 +33,6 @@ FPDiOSACH *fingerPrint;
   } else {
     result(FlutterMethodNotImplemented);
   }
-}
-
-- (void)viewDidLoad {
-    [super viewDidLoad];
-
-    fingerPrint = [[FPDiOSACH alloc] init];
 }
 
 @end

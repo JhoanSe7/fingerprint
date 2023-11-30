@@ -39,8 +39,9 @@ public class FingerprintPlugin implements FlutterPlugin, MethodCallHandler {
     public void onMethodCall(@NonNull MethodCall call, @NonNull Result result) {
         if (call.method.equals("getPlatformVersion")) {
             result.success("Android " + Build.VERSION.RELEASE);
-        } else if (call.method.equals("generate")) {
+        } else if (call.method.equals("initialize")) {
             fingerprintCreate = new FingerprintCreateACH();
+        } else if (call.method.equals("generate")) {
             try {
                 jsonFingerprint = fingerprintCreate.generateFingerpintKey(context, "9vyxHBWPNcCvN7I");
                 result.success(jsonFingerprint);
