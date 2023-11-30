@@ -135,7 +135,8 @@ class General {
 ```
 
 **Json Plugin Response**
-```
+
+```json
 {
     "Geolocation": {
         "city": "city_name",
